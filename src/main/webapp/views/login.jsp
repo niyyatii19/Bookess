@@ -80,14 +80,10 @@
 
 					<form action="login" method="POST">
 
-							<input type="text" id="login" class="fadeIn second" name="email"
-							placeholder="Email" value="" /> 
-							
-							<input type="password" value=""
+						<input type="text" id="login" class="fadeIn second" name="email"
+							placeholder="Email" value="" /> <input type="password" value=""
 							id="password" class="fadeIn third" name="password"
-							placeholder="Password" /> 
-							
-							<input type="submit"
+							placeholder="Password" /> <input type="submit"
 							class="fadeIn fourth" value="Log In" />
 					</form>
 

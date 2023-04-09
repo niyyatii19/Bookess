@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Book Store</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -16,26 +16,22 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
-p {
-	color: white;
-	background-color: black;
-	padding: 10px;
+.error {
+	color: red;
 }
 
-.heading {
-	padding: 40px;
-	font-size: 45px;
-	background-color: #c1c100;
-	color: #6c0f0f;
-	border: aliceblue;
-	font-family: cursive;
-	font-style: oblique;
+.img-fluid {
+	max-width: 50%;
+	height: auto;
 }
 </style>
-
 </head>
 <body>
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Book Store</a>
@@ -54,7 +50,7 @@ p {
 
 					<%
 						String id = (String) session.getAttribute("email");
-					//
+
 					if (id == null) {
 					%>
 					<li class="nav-item"><a class="nav-link" href="login">Login</a>
@@ -67,10 +63,6 @@ p {
 					%>
 					<li class="nav-item"><a class="nav-link" href="logout">Logout</a>
 					</li>
-					<li class="nav-item"><a class="nav-link"
-						href="/user/likedBooks">Liked Books</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/user/readLaterBooks">Read Later Books</a></li>
 					<%
 						}
 					%>
@@ -79,49 +71,42 @@ p {
 					String name = (String) session.getAttribute("name");
 				if (name != null) {
 				%>
-				<span class="navbar-text"> Welcome ${name }!    </span>
+				<span class="navbar-text"> Welcome ${name }! </span>
 				<%
 					}
 				%>
-
 			</div>
 
 
 		</div>
 	</nav>
 
-	<h1 class='text-center heading'>Welcome to Bookess</h1>
-	<div class="container overflow-hidden text-center">
-		<div class="row gx-5 row-cols-3">
+	<div class="container">
 
-			<c:forEach items="${books}" var="book">
-				<div class='col'>
-					<div class='p-3'>
-						<div class="card">
-							<img src="${book.url }" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h5 class="card-title">${book.title }</h5>
-								<p class="card-text">${book.description }</p>
-								<%
-									String id1 = (String) session.getAttribute("email");
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Book image</th>
+					<th scope="col">Book Title</th>
+					<th scope="col">Book Description</th>
 
-								if (id1 != null) {
-								%>
-								<a href="/user/book/${book.id }" class="btn btn-primary">Like</a>
-								&nbsp&nbsp <a href="/user/readLaterBook/${book.id }"
-									class="btn btn-primary">Add to Read Later</a>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${books }" var="book">
+					<tr>
+						<td><img src="${book.url }" class="img-fluid rounded"
+							width=60px></td>
+						<td>${book.title }</td>
+						<td><p>${book.description }</p></td>
+					</tr>
+				</c:forEach>
 
-								<%
-									}
-								%>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
 
-		</div>
+			</tbody>
+		</table>
 	</div>
+
 
 
 </body>

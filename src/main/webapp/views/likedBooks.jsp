@@ -23,6 +23,11 @@
 .error {
 	color: red;
 }
+
+.img-fluid {
+	max-width: 50%;
+	height: auto;
+}
 </style>
 </head>
 <body>
@@ -45,7 +50,6 @@
 
 					<%
 						String id = (String) session.getAttribute("email");
-					int id2 = (int) session.getAttribute("ïd");
 
 					if (id == null) {
 					%>
@@ -63,6 +67,15 @@
 						}
 					%>
 				</ul>
+
+				<%
+					String name = (String) session.getAttribute("name");
+				if (name != null) {
+				%>
+				<span class="navbar-text"> Welcome ${name }! </span>
+				<%
+					}
+				%>
 			</div>
 
 
@@ -76,18 +89,19 @@
 				<tr>
 					<th scope="col">Book image</th>
 					<th scope="col">Book Title</th>
-					<th scope="col">Remove</th>
+					<th scope="col">Add to read later</th>
 
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${books }" var="book">
 					<tr>
-						<td><img src="${book.url }" class="img-fluid rounded"></td>
+						<td><img src="${book.url }" class="img-fluid rounded"
+							width=50px></td>
 						<td>${book.title }</td>
-						<td><a
-							href="/user/remove/${book.id }">
-								<i class="fa fa-trash"></i>
+						<td><a href="/user/readLaterBook/${book.id }">
+								<button type="button" class="btn btn-primary">Add to
+									read later</button>
 						</a></td>
 					</tr>
 				</c:forEach>

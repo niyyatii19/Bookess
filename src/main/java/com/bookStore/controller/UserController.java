@@ -15,27 +15,51 @@ import com.bookStore.entity.Books;
 import com.bookStore.service.UserService;
 
 @Controller
-@RequestMapping("/user/")
+
 public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
-	@GetMapping("/likedBooks")
-	public String getAllLikedBooks(Map<String, Set<Books>> map, HttpSession session){
+
+	@GetMapping("/user/likedBooks")
+	public String getAllLikedBooks(Map<String, Set<Books>> map, HttpSession session) {
 		int userId = (int) session.getAttribute("id");
 		Set<Books> books = userService.getAllLikedBooks(userId);
-		//System.out.println(books);
+		// System.out.println(books);
+		if (books.isEmpty()) {
+			return "redirect:showBooks?error=list is empty";
+		}
 		map.put("books", books);
 		return "likedBooks";
 	}
-	
-	@GetMapping("book/{bookId}")
-	public String addToLikeBooks( @PathVariable("bookId") int bookId, HttpSession session) {
+
+	@GetMapping("user/book/{bookId}")
+	public String addToLikeBooks(@PathVariable("bookId") int bookId, HttpSession session) {
 		int userId = (int) session.getAttribute("id");
-		//System.out.println(userId);
+		// System.out.println(userId);
 		String result = userService.addToLikedBooks(userId, bookId);
-		//System.out.println(result);
-		return "redirect:showBooks";
+		// System.out.println(result);
+		return "redirect:/showBooks";
+	}
+
+	@GetMapping("/user/readLaterBooks")
+	public String getAllReadLaterBooks(Map<String, Set<Books>> map, HttpSession session) {
+		int userId = (int) session.getAttribute("id");
+		Set<Books> books = userService.getAllReadLaterBooks(userId);
+		// System.out.println(books);
+		if (books.isEmpty()) {
+			return "redirect:showBooks?error=list is empty";
+		}
+		map.put("books", books);
+		return "readLaterBooks";
+	}
+
+	@GetMapping("user/readLaterBook/{bookId}")
+	public String addToReadLaterBooks(@PathVariable("bookId") int bookId, HttpSession session) {
+		int userId = (int) session.getAttribute("id");
+		// System.out.println(userId);
+		String result = userService.addToReadLaterBooks(userId, bookId);
+		// System.out.println(result);
+		return "redirect:/showBooks";
 	}
 }

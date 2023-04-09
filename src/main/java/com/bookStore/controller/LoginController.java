@@ -39,6 +39,7 @@ public class LoginController {
 		
 		session.removeAttribute("email");
 		session.removeAttribute("id");
+		session.removeAttribute("name");
 		session.invalidate();
 		return "redirect:showBooks";
 	}
@@ -56,7 +57,7 @@ public class LoginController {
 			if(user != null) {
 				session.setAttribute("email", loginDto.getEmail());
 				session.setAttribute("id", user.getId());
-				
+				session.setAttribute("name", user.getName());
 				return "redirect:showBooks";
 			}
 		} catch (Exception e) {
