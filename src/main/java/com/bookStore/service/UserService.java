@@ -36,10 +36,11 @@ public class UserService {
 	}
 
 	public String registerUser(Users user) {
-		Users savedUser = userRepo.saveAndFlush(user);
-		if (savedUser == null) {
+		
+		if (userRepo.findByEmail(user.getEmail()) != null) {
 			throw new EntityExistsException("User id already exists");
 		}
+		Users savedUser = userRepo.saveAndFlush(user);
 		return "Inserted Successfully";
 	}
 

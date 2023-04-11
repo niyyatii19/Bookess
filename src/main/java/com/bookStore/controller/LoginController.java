@@ -58,7 +58,7 @@ public class LoginController {
 				session.setAttribute("email", loginDto.getEmail());
 				session.setAttribute("id", user.getId());
 				session.setAttribute("name", user.getName());
-				return "redirect:showBooks";
+				return "redirect:showBooks/"+user.getId();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

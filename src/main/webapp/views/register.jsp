@@ -20,13 +20,14 @@
 .error {
 	color: red;
 }
-.addPadding{
+
+.addPadding {
 	padding: 50px;
 }
 </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Book Store</a>
 			<button class="navbar-toggler" type="button"
@@ -63,11 +64,14 @@
 		</div>
 	</nav>
 
-<div class="container addPadding">
-  <h1 class = "heading">Register yourself here!</h1>
-</div>
 	<div class="container addPadding">
-		<form method = "POST">
+		<h1 class="heading">Register yourself here!</h1>
+	</div>
+
+
+	<div class="container addPadding">
+
+		<form method="POST">
 			<div class="row mb-3">
 				<label for="inputUsername" class="col-sm-2 col-form-label">Name</label>
 				<div class="col-sm-10">
@@ -88,6 +92,13 @@
 			</div>
 			<button type="submit" class="btn btn-primary">Register</button>
 		</form>
+	</div>
+
+	<div>
+		<span class='error'> <c:if test="${error != null }">
+								${error }
+							</c:if>
+		</span>
 	</div>
 </body>
 </html>
